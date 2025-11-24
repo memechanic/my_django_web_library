@@ -29,7 +29,6 @@ def login(request):
     return render(request, "myadmin/login.html")
 
 @action_logger()
-@admin_access()
 def logout(request):
     request.session.flush()
     return redirect('home')
