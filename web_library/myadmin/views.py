@@ -36,15 +36,11 @@ def logout(request):
 @action_logger()
 def dashboard(request):
     books = Book.objects.all()
-    genres = Genre.objects.all()
-    form = AddBookForm()
 
     admin_name = request.session.get("admin_name")
     context = {
         "admin_name": admin_name,
         "books": books,
-        "genres": genres,
-        "addBookForm": form,
     }
     return render(request, "myadmin/dashboard.html", context)
 
