@@ -1,6 +1,7 @@
 from functools import wraps
 
 from django.http import HttpResponseNotAllowed
+from django.shortcuts import redirect
 from .models import User
 
 def admin_access():
@@ -14,11 +15,11 @@ def admin_access():
                 try:
                     admin = User.objects.get(pk=admin_id)
                 except User.DoesNotExist:
-                    return HttpResponseNotAllowed('Нет доступа')
+                    return redirect('home') # HttpResponseNotAllowed('Нет доступа')
                 else:
                     return response
             else:
-                return HttpResponseNotAllowed('Нет доступа')
+                return redirect('home') # HttpResponseNotAllowed('Нет доступа')
             
         return wrapper
     return decorator
