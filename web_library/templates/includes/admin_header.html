@@ -1,0 +1,28 @@
+<nav class="navbar bg-dark-subtle navbar-expand border-bottom border-secondary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url "dashboard" %}">Администрирование</a>
+        
+        <ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == "dashboard" %}active{% endif %}" aria-current="page" href="{% url "dashboard" %}">Панель управления</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == "add-book" %}active{% endif %}" aria-current="page" href="{% url "add-book" %}">Добавить книгу</a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == "add-genre" %}active{% endif %}" aria-current="page" href="{% url "add-genre" %}">Управление жанрами</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {% if request.resolver_match.url_name == "logs" %}active{% endif %}" aria-current="page" href="{% url "logs" %}">Логи</a>
+            </li>
+        </ul>
+
+        <div class="d-flex">
+            <a href="{% url "logout" %}" class="btn btn-outline-light">Выйти</a>
+        </div>
+    </div>
+</nav>

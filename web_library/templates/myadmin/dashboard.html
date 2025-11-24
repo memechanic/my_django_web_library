@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Панель администратора{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+  {% for msg in messages %}
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="myToast" class="toast align-items-center border-0 {% if msg.tags == "success" %}text-bg-success {% else %}text-bg-danger{% endif %}" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          {{ msg }}
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endif %}
+
+<h1 class="display-5">Список книг</h1>
+
+<!--
+<div class="d-flex py-2 justify-content-center">
+  <a href="{% url "add-book" %}" class="btn btn-success border-success-subtle col-12">Добавить</a>
+</div>
+-->
+
+<table id="bookTable" class="table table-bordered table-striped table-hover align-middle">
+  <thead>
+    <tr><th>Название</th><th>Автор</th><th>Жанр</th><th>Рейтинг</th></tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for book in books %}
+    <tr class="clickable-row" data-href="{% url "book-detail" book.id %}">
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.genre }}</td>
+      <td>
+        {% for i in "12345" %}
+          {% if forloop.counter <= book.rating %}
+              <i class="bi bi-star-fill text-warning"></i>
+          {% else %}
+              <i class="bi bi-star text-secondary"></i>
+          {% endif %}
+      {% endfor %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4" class="text-center text-muted">Нет книг</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

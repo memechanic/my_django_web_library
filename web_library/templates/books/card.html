@@ -1,0 +1,27 @@
+<div class="card bg-dark-subtle border-secondary shadow-sm book-card">
+    <div class="row g-0 h-auto">
+        <div class="col-md-4 d-flex align-items-center">
+            <img src="{{ book.cover_image.url }}" class="img-fluid rounded-start w-100 h-100" alt="{{ book.title }}">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <p class="card-subtitle text-secondary mb-2">{{ book.author }}</p>
+                <p class="card-subtitle text-secondary mb-2">Жанр: {{ book.genre }}</p>
+                <p class="card-text">{{ book.description|truncatechars:150 }}</p>
+                <div class="mb-2">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= book.rating %}
+                            <i class="bi bi-star-fill text-warning"></i>
+                        {% else %}
+                            <i class="bi bi-star text-secondary"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <a href="{% url "download-book" book.id %}" download class="btn btn-outline-light">
+                    <i class="bi bi-download"></i> Скачать
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

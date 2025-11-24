@@ -1,0 +1,27 @@
+<nav class="navbar bg-dark-subtle navbar-expand border-bottom border-secondary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">Веб-Библиотека</a>
+        
+        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="genresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Жанры
+                </a>
+                <ul class="dropdown-menu dropdown-menu" aria-labelledby="genresDropdown">
+                    {% for genre in genres %}
+                        <li><a class="dropdown-item" href="{% url 'books_by_theme' genre.id %}">{{ genre.name }}</a></li>
+                    {% empty %}
+                        <li><span class="dropdown-item-text text-muted">Нет жанров</span></li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+
+        <div class="d-flex">
+            <a href="{% url 'login' %}" class="btn btn-outline-light">Войти</a>
+        </div>
+        
+    </div>
+</nav>

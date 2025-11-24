@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Веб-Библиотека{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Каталог книг</h2>
+
+<div class="row g-4">
+    {% for book in books %}
+        <div class="col-12 col-md-6">
+            {% include 'books/card.html' with book=book %}
+        </div>
+    {% empty %}
+        <p class="text-secondary">Пока нет книг.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
