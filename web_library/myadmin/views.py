@@ -5,7 +5,7 @@ from .models import User
 from books.models import Book, Genre, AddBookForm, AddGenreForm
 from logger.models import Log
 from logger.decorators import action_logger
-
+from .decorators import admin_access
 
 @action_logger()
 def login(request):
@@ -29,11 +29,13 @@ def login(request):
     return render(request, "myadmin/login.html")
 
 @action_logger()
+@admin_access()
 def logout(request):
     request.session.flush()
     return redirect('home')
 
 @action_logger()
+@admin_access()
 def dashboard(request):
     books = Book.objects.all()
 
@@ -46,6 +48,7 @@ def dashboard(request):
 
 
 @action_logger()
+@admin_access()
 def add_book(request):
     admin_name = request.session.get("admin_name")
 
@@ -73,6 +76,7 @@ def add_book(request):
 
 
 @action_logger()
+@admin_access()
 def add_genre(request):
     admin_name = request.session.get("admin_name")
     genres = Genre.objects.all()
@@ -105,6 +109,7 @@ def add_genre(request):
 
 
 @action_logger()
+@admin_access()
 def delete_genre(request, genre_id):
     genre = Genre.objects.get(pk=genre_id)
     try:
@@ -115,6 +120,7 @@ def delete_genre(request, genre_id):
         return redirect("add-genre")
     
 @action_logger()
+@admin_access()
 def book_detail(request, book_id):
     admin_name = request.session.get("admin_name")
     
@@ -149,6 +155,7 @@ def book_detail(request, book_id):
 
 
 @action_logger()
+@admin_access()
 def delete_book(request, book_id):
     admin_name = request.session.get("admin_name")
     
@@ -170,6 +177,7 @@ def delete_book(request, book_id):
     
 
 @action_logger()
+@admin_access()
 def logs(request):
     admin_name = request.session.get("admin_name")
     
@@ -182,6 +190,7 @@ def logs(request):
     return render(request, "myadmin/logs.html", context)
 
 @action_logger()
+@admin_access()
 def download_logs(request):
     data = list(Log.objects.values())
 
